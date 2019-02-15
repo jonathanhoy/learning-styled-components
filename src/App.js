@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from './Global';
+
+
+// media query object
+const size = {
+  small: 400,
+  med: 960,
+  large: 1140
+}
+
+// media query function
+const media = Object.keys(size).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${size[label]}px) {
+      ${css(...args)}
+    }
+  `
+  return acc;
+}, {});
 
 const Fake = ({ className }) => (
   <div className={className}>
@@ -9,8 +27,25 @@ const Fake = ({ className }) => (
   </div>
 )
 
+const DoubleFake = styled(Fake)`
+  h2 {
+    color: red;
+  }
+`;
+
+// CSS Helper, needed for props in mixins
+const fixedTop = css`
+  position: fixed;
+  top: ${({top}) => top + 'px'};
+  left: 0;
+`;
+
+// ex. of media query
 const Heading = styled.h1`
   font-size: 2rem;
+  ${media.med`
+    color: blue;
+  `}
 `;
 
 const color = "white";
@@ -28,7 +63,8 @@ const Button = styled.button`
 
 const CancelButton = styled(Button)`
   background: tomato;
-`
+  ${fixedTop};
+`;
 
 const AppWrapper = styled.div`
   header {
@@ -36,12 +72,6 @@ const AppWrapper = styled.div`
   }
   ${Button} {
     margin-bottom: 2rem;
-  }
-`;
-
-const DoubleFake = styled(Fake)`
-  h2 {
-    color: red;
   }
 `;
 
@@ -56,7 +86,7 @@ class App extends Component {
           </Heading>
           <DoubleFake />
           <Button>Save</Button>
-          <CancelButton>Cancel</CancelButton>
+          <CancelButton top="100">Cancel</CancelButton>
           <Heading>Heading 2</Heading>
           <a
             className="App-link"
@@ -67,6 +97,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <GlobalStyle />
       </AppWrapper>
     );
   }
