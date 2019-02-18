@@ -29,7 +29,7 @@ class App extends Component {
             css={`
               background: red;
               h2 {
-                font-size: 100px;
+                font-size: 36px;
               }
             `}
           >
@@ -38,7 +38,7 @@ class App extends Component {
               <Card>
                 <h2>Card Heading</h2>
                 <Card.Button modifiers="cancel">Say Hello</Card.Button>
-                <Card.Button>Say Hello</Card.Button>
+                <Card.Button as="a">Say Hello</Card.Button>
               </Card>
             </ThemeProvider>
             {/* <Button modifiers="cancel">Cancel</Button>

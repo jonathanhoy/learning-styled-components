@@ -31,3 +31,4 @@ export const Button = styled.button`
 export const CancelButton = styled(Button)`
   background: tomato;
 `;
+
