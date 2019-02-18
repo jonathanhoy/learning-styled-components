@@ -1,8 +1,17 @@
 import { css } from 'styled-components';
 
-// CSS Helper, needed for props in mixins
-export const fixedTop = css`
-  position: fixed;
-  top: ${({ top }) => top + 'px'};
-  left: 0;
-`;
+export const fixed = ({ x = 0, y = 0, yProp = 'top', xProp = 'left' } = {}) => {
+  return css`
+    position: fixed;
+    ${yProp}: ${y};
+    ${xProp}: ${x};
+  `;
+};
+
+export const absolute = ({ x = 0, y = 0, yProp = 'top', xProp = 'left' } = {}) => {
+  return css`
+    position: absolute;
+    ${yProp}: ${y};
+    ${xProp}: ${x};
+  `;
+};
