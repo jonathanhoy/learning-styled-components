@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import logo from './logo.svg';
 import GlobalStyle from './Global';
-
-
-// media query object
-const size = {
-  small: 400,
-  med: 960,
-  large: 1140
-}
-
-// media query function
-const media = Object.keys(size).reduce((acc, label) => {
-  acc[label] = (...args) => css`
-    @media (max-width: ${size[label]}px) {
-      ${css(...args)}
-    }
-  `
-  return acc;
-}, {});
+import { Heading, Button, CancelButton } from './elements';
 
 const Fake = ({ className }) => (
   <div className={className}>
@@ -33,38 +16,9 @@ const DoubleFake = styled(Fake)`
   }
 `;
 
-// CSS Helper, needed for props in mixins
-const fixedTop = css`
-  position: fixed;
-  top: ${({top}) => top + 'px'};
-  left: 0;
-`;
 
-// ex. of media query
-const Heading = styled.h1`
-  font-size: 2rem;
-  ${media.med`
-    color: blue;
-  `}
-`;
 
-const color = "white";
 
-const Button = styled.button`
-  padding: 5px 10px;
-  border-radius: 4px;
-  color: ${color};
-  font-size: 2rem;
-  border: none;
-  background: indigo;
-  /* ${props => props.type === 'cancel' && 'background: red;'}; */
-  /* background: ${props => (props.type === 'cancel' ? 'tomato;' : 'indigo;')}; */
-`;
-
-const CancelButton = styled(Button)`
-  background: tomato;
-  ${fixedTop};
-`;
 
 const AppWrapper = styled.div`
   header {
